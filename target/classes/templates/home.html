@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Distance Conversion</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btn").click(function() {
+                console.log("after click");
+                var from = $("#cfrom").val();
+                console.log("selected from value is " + from);
+
+                var to = $("#cto").val();
+                console.log("selected to value is " + to);
+
+                var input = $("#value").val();
+                console.log("selected input value is " + input);
+                var output = -1;
+
+                if (from == to) {
+                    alert("check your from & to values");
+                }
+
+                if (from == 'Meters' && to == 'Kilometers') {
+                    output = (+input) / 1000;
+                } else if (from == 'Kilometers' && to == 'Meters') {
+                    output = ((+input) * (1000))
+                } else if (from == 'Miles' && to == 'Kilometers') {
+                    output = ((+input) * (1.6))
+                } else if (from == 'Kilometers' && to == 'Miles') {
+                    output = ((+input) / (1.6))
+                } else if (from == 'Millimeters' && to == 'Centemeters') {
+                    output = ((+input) / (10))
+                } else if (from == 'Centemeters' && to == 'Millimeters') {
+                    output = ((+input) * (10))
+                } else if (from == 'Centemeters' && to == 'Meters') {
+                    output = ((+input) / (100))
+                } else if (from == 'Meters' && to == 'Centemeters') {
+                    output = ((+input) * (100))
+                }
+
+                // 2 kilometers = 2000 meters
+                output = input + " " + from + " = " + output + " " + to
+                console.log("output value is" + output);
+                $("#result").html(output);
+            });
+        });
+    </script>
+    </head>
+    <body>
+        <h1>Distance Conversion:</h1>
+
+        <div style="width: 20%;float: left;">Convert From :
+
+
+    <select id="cfrom" style="padding:5px">
+<option selected="selected"> Meters </option>
+<option> Kilometers </option>
+<option> Inches </option>
+<option> Miles </option>
+<option> Millimeters </option>
+<option> Centemeters </option>
+</select></div><div style="width: 20%;float: left;"> Convert To :
+    <select id="cto"  style="padding:5px">
+<option selected="selected"> Meters </option>
+<option> Kilometers </option>
+<option> Inches </option>
+<option> Miles </option>
+<option> Millimeters </option>
+<option> Centemeters </option>
+</select></div> Value:
+    <input type="text" name="number" id="value"></input><br><br>
+    <button id="btn"> Convert </button>
+    <p id="result"></p>
+    </body>
+</html>
